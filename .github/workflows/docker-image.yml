@@ -32,9 +32,9 @@ jobs:
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build Docker Image
       run: | 
-        docker image build -t mjlb/docker-graphql:${{ env.NEW_VERSION }} .
+        docker image build -t mjlb/docker-graphql:${{ NEW_VERSION }} .
         docker image build -t mjlb/docker-graphql:latest .
     - name: Push Docker Image
       run: |
-        docker image push mjlb/docker-graphql:${{ env.NEW_VERSION }}
+        docker image push mjlb/docker-graphql:${{ NEW_VERSION }}
         docker image push mjlb/docker-graphql:latest
