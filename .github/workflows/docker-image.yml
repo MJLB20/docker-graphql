@@ -23,6 +23,10 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build Docker Image
-      run: docker image build -t mjlb/docker-graphql:0.0.2 .
+      run: | 
+        docker image build -t mjlb/docker-graphql:0.0.3 .
+        docker image build -t mjlb/docker-graphql:latest .
     - name: Push Docker Image
-      run: docker image push mjlb/docker-graphql:0.0.2
+      run: |
+        docker image push mjlb/docker-graphql:0.0.3
+        docker image push mjlb/docker-graphql:latest
