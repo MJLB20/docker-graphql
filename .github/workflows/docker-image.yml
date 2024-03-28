@@ -28,13 +28,16 @@ jobs:
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: | 
-        docker image build -t mjlb/docker-graphql:${{ NEW_VERSION }} .
+        docker image build -t mjlb/docker-graphql:$NEW_VERSION .
         docker image build -t mjlb/docker-graphql:latest .
     - name: Push Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker image push mjlb/docker-graphql:${{ NEW_VERSION }}
+        docker image push mjlb/docker-graphql:$NEW_VERSION
         docker image push mjlb/docker-graphql:latest
